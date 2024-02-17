@@ -1,0 +1,9 @@
+.mainMenu {
+  background-color: rgb(255, 235, 235);
+}
+
+.difSelect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

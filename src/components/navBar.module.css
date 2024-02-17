@@ -1,0 +1,19 @@
+.navContainer {
+  position: relative;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.logo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backButton {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}

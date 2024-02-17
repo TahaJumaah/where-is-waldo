@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import styles from "./canvas.module.css";
 import { useState } from "react";
 
@@ -10,10 +11,6 @@ export default function Canvas() {
   );
 
   function handleCanvasClick(Event) {
-    // setPointer({
-    //   xCoordinate: Event.nativeEvent.offsetX,
-    //   yCoordinate: Event.nativeEvent.offsetY,
-    // });
     const imgH = Event.target.height;
     const imgW = Event.target.width;
     const offsetX = Event.nativeEvent.offsetX;
@@ -22,14 +19,39 @@ export default function Canvas() {
     const percentY = (offsetY / imgH) * 100;
     console.log(percentX, percentY);
   }
-  return (
-    <div className={styles.mainContainer}>
-      <img
-        onClick={handleCanvasClick}
-        className={styles.waldo}
-        src="assets\easy\where_is_waldo_easy_wide.jpg"
-        alt="Image of people on a beach, including waldo to find"
-      />
-    </div>
-  );
+  const params = useParams();
+  if (params.difficulty === "Easy") {
+    return (
+      <div className={styles.mainContainer}>
+        <picture className={styles.waldo} onClick={handleCanvasClick}>
+          <source
+            srcSet="assets\easy\where_is_waldo_easy_wide.jpg"
+            media="(min-width:500px)"
+          />
+          <source
+            srcSet="assets\easy\where_is_waldo_easy_mobile.jpg"
+            media="(min-width:100px)"
+          />
+          <img src="assets\easy\where_is_waldo_easy_wide.jpg" alt="" />
+        </picture>
+      </div>
+    );
+  }
+  if (params.difficulty === "Medium") {
+    return (
+      <div className={styles.mainContainer}>
+        <picture className={styles.waldo} onClick={handleCanvasClick}>
+          <source
+            srcSet="assets\medium\where_is_waldo_medium_wide.jpg"
+            media="(min-width:500px)"
+          />
+          <source
+            srcSet="assets\medium\where_is_waldo_medium_mobile.jpg"
+            media="(min-width:100px)"
+          />
+          <img src="assets\medium\where_is_waldo_medium_wide.jpg" alt="" />
+        </picture>
+      </div>
+    );
+  }
 }
