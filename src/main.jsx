@@ -6,10 +6,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import NavBar from "./components/navBar.jsx";
 import Canvas from "./components/canvas.jsx";
 
+async function loaderfunction() {
+  const data = await fetch("http://127.0.0.1:3000");
+  return data;
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <NavBar></NavBar>,
+    loader: loaderfunction,
     children: [
       {
         path: "/",

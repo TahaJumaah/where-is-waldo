@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import styles from "./canvas.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Canvas() {
   const [pointer, setPointer] = useState(
@@ -51,6 +51,13 @@ export default function Canvas() {
           />
           <img src="assets\medium\where_is_waldo_medium_wide.jpg" alt="" />
         </picture>
+      </div>
+    );
+  }
+  if (params.difficulty === "Hard") {
+    return (
+      <div className={styles.mainContainer}>
+        <img src="assets\hard\where_is_waldo_hard_allScreens.jpg" alt="" />
       </div>
     );
   }

@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styles from "./navBar.module.css";
 import { Link, Outlet, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 export default function NavBar() {
+  const fetchData = useLoaderData();
+  console.log(fetchData);
   const params = useParams();
 
   if (params.difficulty !== undefined) {
