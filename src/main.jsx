@@ -2,28 +2,52 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./globals.css";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useParams,
+} from "react-router-dom";
 import NavBar from "./components/navBar.jsx";
 import Canvas from "./components/canvas.jsx";
+import MainMenu from "./components/mainMenu.jsx";
 
-async function loaderfunction() {
-  const data = await fetch("http://127.0.0.1:3000");
-  return data;
+async function difficultyLoader({ params, request }) {
+  const res = await fetch(`http://127.0.0.1:3000/play/${params.difficulty}`, {
+    credentials: "include",
+  });
+  return res;
 }
+
+async function difficultyAction({ params, request }) {
+  // console.log("CANVAS ACTION");
+  // console.log(params);
+  // console.log(request);
+
+  return "ACTION RETURN";
+}
+// async function appLoader() {
+//   const data = await fetch("http://127.0.0.1:3000/getSession");
+//   return data;
+// }
+
+// async function canvasAction(request, params) {}
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <NavBar></NavBar>,
-    loader: loaderfunction,
+    element: <NavBar />,
+    // loader: appLoader,
     children: [
       {
         path: "/",
         element: <App></App>,
+        // loader: appLoader,
       },
       {
         path: "/:difficulty",
         element: <Canvas></Canvas>,
+        loader: difficultyLoader,
+        // action: difficultyAction,
+        id: "difficulty",
       },
     ],
   },

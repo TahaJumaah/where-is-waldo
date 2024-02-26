@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./navBar.module.css";
 import { Link, Outlet, useParams } from "react-router-dom";
-import { useLoaderData } from "react-router-dom";
+import Timer from "./Timer";
 export default function NavBar() {
-  const fetchData = useLoaderData();
-  console.log(fetchData);
   const params = useParams();
 
   if (params.difficulty !== undefined) {
@@ -17,6 +15,7 @@ export default function NavBar() {
           <Link className={styles.backButton} to={"/"}>
             Back
           </Link>
+          <div className={styles.navTimer}>{<Timer />}</div>
         </nav>
         <Outlet></Outlet>
       </>
