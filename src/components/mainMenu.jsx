@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 export default function MainMenu() {
   useEffect(() => {
     async function startSession() {
-      const res = await fetch("http://127.0.0.1:3000/startSession", {
+      const server = import.meta.env.VITE_server;
+      const res = await fetch(`${server}/startSession`, {
         credentials: "include",
       });
       const data = await res.json();

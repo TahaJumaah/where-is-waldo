@@ -1,31 +1,40 @@
 import { useEffect, useRef, useState } from "react";
 import { DateTime, Interval, Duration } from "luxon";
+import styles from "./navBar.module.css";
 export default function Timer() {
   const [gameTimer, setGameTimer] = useState(null);
+  const serverStartTime = useRef(null);
   useEffect(() => {
     const getSession = async () => {
-      const res = await fetch("http://127.0.0.1:3000/getSession", {
+      const server = import.meta.env.VITE_server;
+
+      const res = await fetch(`${server}/getSession`, {
         credentials: "include",
       });
       const data = await res.json();
-      setGameTimer(data.startTime);
+      serverStartTime.current = DateTime.fromISO(data.startTime);
       return data;
     };
     getSession();
 
     const interval = setInterval(() => {
-      const dur = Interval.fromDateTimes(
-        DateTime.fromISO(gameTimer),
-        DateTime.now()
-      );
-      console.log(dur);
-      setGameTimer("fromINTERVAL");
+      const generalDiff = DateTime.now()
+        .diff(serverStartTime.current, ["minutes", "seconds"])
+        .toObject();
+      setGameTimer({
+        minutes: generalDiff.minutes,
+        seconds: generalDiff.seconds,
+      });
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-  return (
-    <>
-      <p>Timer: {gameTimer}</p>
-    </>
-  );
+  if (gameTimer) {
+    return (
+      <div>
+        {gameTimer.minutes}:{gameTimer.seconds}
+      </div>
+    );
+  } else {
+    return null;
+  }
 }

@@ -12,9 +12,11 @@ import Canvas from "./components/canvas.jsx";
 import MainMenu from "./components/mainMenu.jsx";
 
 async function difficultyLoader({ params, request }) {
-  const res = await fetch(`http://127.0.0.1:3000/play/${params.difficulty}`, {
+  const server = import.meta.env.VITE_server;
+  const res = await fetch(`${server}/play/${params.difficulty}`, {
     credentials: "include",
   });
+  console.log(res);
   return res;
 }
 

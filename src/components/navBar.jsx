@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styles from "./navBar.module.css";
 import { Link, Outlet, useParams } from "react-router-dom";
 import Timer from "./Timer";
@@ -10,10 +9,10 @@ export default function NavBar() {
       <>
         <nav className={styles.navContainer}>
           <Link to={"/"} className={styles.logo}>
-            WW?
+            ?
           </Link>
           <Link className={styles.backButton} to={"/"}>
-            Back
+            &#60; Back
           </Link>
           <div className={styles.navTimer}>{<Timer />}</div>
         </nav>
@@ -25,7 +24,7 @@ export default function NavBar() {
     <>
       <nav className={styles.navContainer}>
         <Link to={"/"} className={styles.logo}>
-          WW?
+          ?
         </Link>
       </nav>
       <Outlet></Outlet>

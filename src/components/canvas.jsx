@@ -1,44 +1,27 @@
 import { useLoaderData, useParams, useSubmit } from "react-router-dom";
 import styles from "./canvas.module.css";
 import { useEffect, useState } from "react";
-import { useFetcher } from "react-router-dom";
-
+import checkSolution from "../api/checkSolution";
+import WaldoFound from "./waldoFound";
 export default function Canvas() {
-  const [data, setData] = useState(null);
+  const [modalStyle, setModalStyle] = useState({ display: "none" });
+  const [isFound, setIsFound] = useState(null);
   const params = useParams();
-  const loaderData = useLoaderData();
-  console.log(loaderData);
 
-  const handleOnClick = async (Event) => {
-    try {
-      const imgH = Event.target.height;
-      const imgW = Event.target.width;
-      const offsetX = Event.nativeEvent.offsetX;
-      const offsetY = Event.nativeEvent.offsetY;
-      const percentX = (offsetX / imgW) * 100;
-      const percentY = (offsetY / imgH) * 100;
-      console.log(percentX, percentY);
-      const response = await fetch(
-        `http://127.0.0.1:3000/api/${params.difficulty}/check`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify({ solX: percentX, solY: percentY }),
-        }
-      );
-      const resData = await response.json();
-      setData(resData);
-      console.log("data");
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(data);
+  const handleOnClick = (Event) => {
+    checkSolution(Event, params, setIsFound);
+    console.log(isFound);
+    setModalStyle({
+      display: "block",
+      position: "absolute",
+      top: Event.clientY + "px",
+      left: Event.clientX + "px",
+    });
   };
   if (params.difficulty === "Easy") {
     return (
       <div className={styles.mainContainer}>
+        <WaldoFound isFound={isFound} modalStyle={modalStyle}></WaldoFound>
         <picture className={styles.waldo} onClick={handleOnClick}>
           <source
             srcSet="assets\easy\where_is_waldo_easy_wide.jpg"
@@ -56,6 +39,8 @@ export default function Canvas() {
   if (params.difficulty === "Medium") {
     return (
       <div className={styles.mainContainer}>
+        <WaldoFound isFound={isFound} modalStyle={modalStyle}></WaldoFound>
+
         <picture className={styles.waldo} onClick={handleOnClick}>
           <source
             srcSet="assets\medium\where_is_waldo_medium_wide.jpg"
@@ -73,6 +58,8 @@ export default function Canvas() {
   if (params.difficulty === "Hard") {
     return (
       <div className={styles.mainContainer}>
+        <WaldoFound isFound={isFound} modalStyle={modalStyle}></WaldoFound>
+
         <img
           onClick={handleOnClick}
           src="assets\hard\where_is_waldo_hard_allScreens.jpg"

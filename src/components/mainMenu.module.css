@@ -2,16 +2,25 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 1fr 4fr 1fr;
+  grid-row-start: 2;
+  grid-column-start: 2;
 }
 
 .mainMenu h1 {
   grid-row-start: 1;
   grid-row-end: 2;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Satisfy", cursive;
+  font-size: 3em;
 }
 
 .mainMenu h2 {
   text-align: center;
+  font-size: 2em;
+  grid-row-start: 2;
+  grid-row-end: 3;
 }
 .difSelect {
   grid-row-start: 3;
@@ -25,7 +34,8 @@
 .difSelect a {
   text-decoration: none;
   color: black;
-  font-size: 2em;
+  font-size: 2.5em;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 @keyframes buttonPulse {
