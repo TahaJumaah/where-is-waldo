@@ -50,7 +50,10 @@ export default function Canvas() {
             srcSet="assets\medium\where_is_waldo_medium_mobile.jpg"
             media="(min-width:100px)"
           />
-          <img src="assets\medium\where_is_waldo_medium_wide.jpg" alt="" />
+          <img
+            src="assets\medium\where_is_waldo_medium_wide.jpg"
+            alt="Sameera"
+          />
         </picture>
       </div>
     );
