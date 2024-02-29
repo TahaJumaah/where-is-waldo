@@ -6,7 +6,7 @@ export default function Timer() {
   const serverStartTime = useRef(null);
   useEffect(() => {
     const getSession = async () => {
-      const server = "https://longhaired-brawny-scooter.glitch.me";
+      const server = "https://where-is-waldo-server-production.up.railway.app/";
 
       const res = await fetch(`${server}/getSession`, {
         credentials: "include",

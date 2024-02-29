@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function MainMenu() {
   useEffect(() => {
     async function startSession() {
-      const server = "https://longhaired-brawny-scooter.glitch.me";
+      const server = "https://where-is-waldo-server-production.up.railway.app/";
       const res = await fetch(`${server}/startSession`, {
         credentials: "include",
       });
