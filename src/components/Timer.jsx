@@ -6,7 +6,7 @@ export default function Timer() {
   const serverStartTime = useRef(null);
   useEffect(() => {
     const getSession = async () => {
-      const server = import.meta.env.VITE_server;
+      const server = "https://longhaired-brawny-scooter.glitch.me";
 
       const res = await fetch(`${server}/getSession`, {
         credentials: "include",
