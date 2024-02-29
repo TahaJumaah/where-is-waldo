@@ -12,12 +12,12 @@ import Canvas from "./components/canvas.jsx";
 import MainMenu from "./components/mainMenu.jsx";
 
 async function difficultyLoader({ params, request }) {
-  // const server = import.meta.env.VITE_server;
-  // const res = await fetch(`${server}/play/${params.difficulty}`, {
-  //   credentials: "include",
-  // });
-  // console.log(res);
-  // return res;
+  const server = "https://where-is-waldo-server-production.up.railway.app";
+  const res = await fetch(`${server}/play/${params.difficulty}`, {
+    credentials: "include",
+  });
+  console.log(res);
+  return res;
 }
 
 async function difficultyAction({ params, request }) {
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       {
         path: "/:difficulty",
         element: <Canvas></Canvas>,
-        // loader: difficultyLoader,
+        loader: difficultyLoader,
         // action: difficultyAction,
         id: "difficulty",
       },

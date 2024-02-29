@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 
 export default async function checkSolution(Event, params, setIsFound) {
   const device = "mobile";
-  const server = import.meta.env.VITE_server;
+  const server = "https://where-is-waldo-server-production.up.railway.app";
   try {
     const imgH = Event.target.height;
     const imgW = Event.target.width;
